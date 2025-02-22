@@ -1,0 +1,9 @@
+<div class="container mt-4">
+    <h2>{{ event.title }}</h2>
+    <p>{{ event.description }}</p>
+    <p><strong>Location:</strong> {{ event.location }}</p>
+    <p><strong>Date:</strong> {{ event.date }}</p>
+    <p><strong>Price:</strong> ${{ event.price }}</p>
+    <p><strong>Seats Available:</strong> {{ event.availableSeats }}</p>
+    <button class="btn btn-success" (click)="bookEvent()">Book Now</button>
+  </div>

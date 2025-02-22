@@ -1,0 +1,20 @@
+<div class="container">
+  <h2 class="mt-4">Available Events</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let event of events">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ event.title }}</h5>
+          <p class="card-text">{{ event.description }}</p>
+          <p><strong>Location:</strong> {{ event.location }}</p>
+          <p><strong>Date:</strong> {{ event.date }}</p>
+          <p><strong>Price:</strong> ${{ event.price }}</p>
+          <p><strong>Seats Available:</strong> {{ event.availableSeats }}</p>
+
+          <button class="btn btn-primary" (click)="navigateToEvent(event.id)">View Details</button>
+          <button class="btn btn-success" (click)="navigateToBook(event.id)">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

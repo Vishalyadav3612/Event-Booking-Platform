@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <h2>Add New Event</h2>
+    <form (submit)="addEvent()">
+      <div class="mb-3">
+        <label class="form-label">Event Title</label>
+        <input type="text" [(ngModel)]="event.title" name="title" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea [(ngModel)]="event.description" name="description" class="form-control"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input type="text" [(ngModel)]="event.location" name="location" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Date</label>
+        <input type="date" [(ngModel)]="event.date" name="date" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Price ($)</label>
+        <input type="number" [(ngModel)]="event.price" name="price" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Available Seats</label>
+        <input type="number" [(ngModel)]="event.availableSeats" name="availableSeats" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-success">Add Event</button>
+      <p class="text-success mt-3">{{ message }}</p>
+    </form>
+  </div>
