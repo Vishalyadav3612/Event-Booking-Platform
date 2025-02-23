@@ -1,0 +1,17 @@
+.event-details-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .event-card {
+    padding: 1rem;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: center;
+  }
+  

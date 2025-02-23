@@ -1,31 +1,45 @@
-<div class="container mt-5">
-    <h2>Add New Event</h2>
-    <form (submit)="addEvent()">
-      <div class="mb-3">
-        <label class="form-label">Event Title</label>
-        <input type="text" [(ngModel)]="event.title" name="title" class="form-control" required>
+<div class="event-form-container">
+  <mat-card class="event-card">
+    <mat-card-title>Add New Event</mat-card-title>
+
+    <form class="event-form" (submit)="addEvent()">
+      <div class="form-fields">
+        <mat-form-field appearance="outline">
+          <mat-label>Event Title</mat-label>
+          <input matInput type="text" [(ngModel)]="event.title" name="title" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="event.description" name="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Location</mat-label>
+          <input matInput type="text" [(ngModel)]="event.location" name="location" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date</mat-label>
+          <input matInput type="date" [(ngModel)]="event.date" name="date" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Price ($)</mat-label>
+          <input matInput type="number" [(ngModel)]="event.price" name="price" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Available Seats</mat-label>
+          <input matInput type="number" [(ngModel)]="event.availableSeats" name="availableSeats" required>
+        </mat-form-field>
       </div>
-      <div class="mb-3">
-        <label class="form-label">Description</label>
-        <textarea [(ngModel)]="event.description" name="description" class="form-control"></textarea>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit">Add Event</button>
       </div>
-      <div class="mb-3">
-        <label class="form-label">Location</label>
-        <input type="text" [(ngModel)]="event.location" name="location" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Date</label>
-        <input type="date" [(ngModel)]="event.date" name="date" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Price ($)</label>
-        <input type="number" [(ngModel)]="event.price" name="price" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Available Seats</label>
-        <input type="number" [(ngModel)]="event.availableSeats" name="availableSeats" class="form-control" required>
-      </div>
-      <button type="submit" class="btn btn-success">Add Event</button>
-      <p class="text-success mt-3">{{ message }}</p>
+      
+      <p class="success-message">{{ message }}</p>
     </form>
-  </div>
+  </mat-card>
+</div>

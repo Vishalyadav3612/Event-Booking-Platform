@@ -12,12 +12,13 @@ export class LoginComponent {
   username = '';
   password = '';
   errorMessage = '';
+  hidePassword = true; 
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
     if (this.authService.login(this.username, this.password)) {
-      this.router.navigate(['/']);  // Redirect to homepage after login
+      this.router.navigate(['/']);
     } else {
       this.errorMessage = 'Invalid credentials!';
     }

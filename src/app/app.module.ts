@@ -17,6 +17,14 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminGuard } from './services/admin.guard';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AddEventComponent } from './components/add-event/add-event.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';  
+import { MatMenuModule } from '@angular/material/menu'; 
+
 
 @NgModule({
   declarations: [
@@ -32,7 +40,17 @@ import { AddEventComponent } from './components/add-event/add-event.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 }) 
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 }) ,
+    FormsModule,
+
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatMenuModule
+    
 
   ],
   providers: [HttpClient, EventService, BookingService, AuthService, AdminGuard, AuthGuardService],

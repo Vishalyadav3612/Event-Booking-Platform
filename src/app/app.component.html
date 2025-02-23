@@ -1,20 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/">Event Booking</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">Events</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" *ngIf="!isLoggedIn()" routerLink="/login">Login</a>
-          <a class="nav-link" *ngIf="isLoggedIn()" href="#" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-    </div>
+<nav [ngClass]="{ 'admin-navbar': isAdmin(), 'user-navbar': isUser() }">
+  <div class="navbar-container">
+    <a class="logo" routerLink="/">Event Booking</a>
+
+    <ul class="nav-links">
+      <li><a routerLink="/">Events</a></li>
+      <li *ngIf="isAdmin()"><a routerLink="/admin/add-event">Add Event</a></li>
+      <li *ngIf="isLoggedIn()"><a routerLink="/profile">Profile</a></li>
+      <li>
+        <a *ngIf="!isLoggedIn()" routerLink="/login">Login</a>
+        <a *ngIf="isLoggedIn()" href="#" (click)="logout()">Logout</a>
+      </li>
+    </ul>
   </div>
 </nav>
 
-<div class="container mt-4">
+<div class="content-container">
   <router-outlet></router-outlet>
 </div>

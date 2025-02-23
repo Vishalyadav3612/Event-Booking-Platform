@@ -23,4 +23,9 @@ export class AppComponent {
     this.authService.logout();
   }
 
+  isUser(): boolean {
+    return this.authService.getUserRole() === 'user';
+  }
+
+
 }

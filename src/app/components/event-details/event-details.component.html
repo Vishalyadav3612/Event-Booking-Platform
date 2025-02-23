@@ -1,9 +1,64 @@
 <div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center">
     <h2>{{ event.title }}</h2>
-    <p>{{ event.description }}</p>
-    <p><strong>Location:</strong> {{ event.location }}</p>
-    <p><strong>Date:</strong> {{ event.date }}</p>
-    <p><strong>Price:</strong> ${{ event.price }}</p>
-    <p><strong>Seats Available:</strong> {{ event.availableSeats }}</p>
-    <button class="btn btn-success" (click)="bookEvent()">Book Now</button>
+
+    <!-- Show three-dot menu only for admin users -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isAdmin()">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="editEvent()">
+        <mat-icon>edit</mat-icon> Edit Event
+      </button>
+      <button mat-menu-item (click)="deleteEvent()">
+        <mat-icon>delete</mat-icon> Delete Event
+      </button>
+    </mat-menu>
   </div>
+
+  <p>{{ event.description }}</p>
+  <p><strong>Location:</strong> {{ event.location }}</p>
+  <p><strong>Date:</strong> {{ event.date }}</p>
+  <p><strong>Price:</strong> ${{ event.price }}</p>
+  <p><strong>Available Seats:</strong> {{ event.availableSeats }}</p>
+
+  <!-- Show the edit form only when editing -->
+  <div *ngIf="isEditing">
+    <h3>Edit Event</h3>
+    <form (submit)="saveEdit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="event.title" name="title" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="event.description" name="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Location</mat-label>
+        <input matInput [(ngModel)]="event.location" name="location" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Date</mat-label>
+        <input matInput type="date" [(ngModel)]="event.date" name="date" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" [(ngModel)]="event.price" name="price" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Available Seats</mat-label>
+        <input matInput type="number" [(ngModel)]="event.availableSeats" name="availableSeats" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Save</button>
+      <button mat-button (click)="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+</div>

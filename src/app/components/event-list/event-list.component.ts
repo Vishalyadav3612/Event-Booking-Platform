@@ -15,11 +15,17 @@ export class EventListComponent {
   searchQuery = '';
   filterCriteria = { location: '', minPrice: 0, maxPrice: 1000 };
 
-  constructor(private eventService: EventService,
-     private authService: AuthService,
-     private router: Router) {}
+  constructor(
+    private eventService: EventService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.loadEvents(); // Load events from the service
+  }
+
+  loadEvents() {
     this.eventService.getEvents().subscribe(events => this.events = events);
   }
 
@@ -37,7 +43,6 @@ export class EventListComponent {
     alert(`Successfully booked: ${event.title}`);
   }
 
-
   navigateToEvent(eventId: number): void {
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login']);  // Redirect to login if not logged in
@@ -53,5 +58,17 @@ export class EventListComponent {
       this.router.navigate([`/event/${eventId}`]);  // Proceed to event booking if logged in
     }
   }
- 
+
+  // ✅ Check if logged-in user is admin
+  isAdmin(): boolean {
+    return this.authService.getUserRole() === 'admin';
+  }
+
+  // ✅ Admin can delete an event
+  deleteEvent(eventId: number): void {
+    if (this.isAdmin()) {
+      this.eventService.deleteEvent(eventId);
+      this.loadEvents(); // Refresh the event list
+    }
+  }
 }

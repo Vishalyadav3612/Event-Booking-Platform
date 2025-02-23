@@ -7,6 +7,8 @@ import { EventDto } from '../models/event.model';
 export class EventService {
   private apiUrl = 'api/events';  // Use in-memory API URL
 
+  private eventsKey = 'events';
+
   constructor(private http: HttpClient) {}
 
   getEvents(): Observable<EventDto[]> {
@@ -18,14 +20,25 @@ export class EventService {
   }
 
   addEvent(event: EventDto): Observable<EventDto> {
-    let events = JSON.parse(localStorage.getItem('events') || '[]');
-
-    // Assign a new ID to the event
-    event.id = events.length ? Math.max(...events.map((e: EventDto) => e.id)) + 1 : 1;
-
-    events.push(event);
-    localStorage.setItem('events', JSON.stringify(events));
-
-    return of(event); // Simulate an API response
+    return this.http.post<EventDto>(this.apiUrl, event);
   }
+
+  updateEvent(event: EventDto): Observable<EventDto> {
+    let events = JSON.parse(localStorage.getItem('events') || '[]');
+    let index = events.findIndex((e: EventDto) => e.id === event.id);
+    if (index !== -1) {
+      events[index] = event;
+      localStorage.setItem('events', JSON.stringify(events));
+    }
+    return of(event);
+  }
+
+  deleteEvent(id: number): Observable<void> {
+    let events = JSON.parse(localStorage.getItem('events') || '[]');
+    events = events.filter((e: EventDto) => e.id !== id);
+    localStorage.setItem('events', JSON.stringify(events));
+    return of();
+  }
+
+ 
 }
