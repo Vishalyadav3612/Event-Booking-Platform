@@ -1,8 +1,56 @@
 <div class="event-container">
   <h2 class="event-title">Available Events</h2>
 
+  <!-- Search & Filters Section -->
+  <div class="filter-container">
+    <!-- Search Input -->
+    <mat-form-field appearance="outline">
+      <mat-label>Search Events</mat-label>
+      <input matInput [(ngModel)]="searchQuery" (input)="applyFilters()" placeholder="Search by name or location">
+    </mat-form-field>
+
+    <!-- Location Filter -->
+    <mat-form-field appearance="outline">
+      <mat-label>Filter by Location</mat-label>
+      <mat-select [(ngModel)]="selectedLocation" (selectionChange)="applyFilters()">
+        <mat-option value="">All Locations</mat-option>
+        <mat-option *ngFor="let event of events" [value]="event.location">{{ event.location }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Date Filter with Calendar -->
+    <mat-form-field appearance="outline">
+      <mat-label>Filter by Date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="applyFilters()">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Price Range Filter -->
+    <mat-form-field appearance="outline">
+      <mat-label>Min Price</mat-label>
+      <input matInput type="number" [(ngModel)]="minPrice" (change)="applyFilters()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Max Price</mat-label>
+      <input matInput type="number" [(ngModel)]="maxPrice" (change)="applyFilters()">
+    </mat-form-field>
+
+    <!-- Sorting -->
+    <mat-form-field appearance="outline">
+      <mat-label>Sort By</mat-label>
+      <mat-select [(ngModel)]="sortBy" (selectionChange)="applyFilters()">
+        <mat-option value="">None</mat-option>
+        <mat-option value="date">Date</mat-option>
+        <mat-option value="price">Price</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Event Grid -->
   <div class="event-grid">
-    <mat-card class="event-card" *ngFor="let event of events">
+    <mat-card class="event-card" *ngFor="let event of filteredEvents">
       <mat-card-header>
         <mat-card-title>{{ event.title }}</mat-card-title>
       </mat-card-header>
@@ -11,7 +59,7 @@
         <p>{{ event.description }}</p>
         <p><strong>Location:</strong> {{ event.location }}</p>
         <p><strong>Date:</strong> {{ event.date }}</p>
-        <p><strong>Price:</strong> ${{ event.price }}</p>
+        <p><strong>Price:</strong> ₹{{ event.price }}</p>
         <p><strong>Seats Available:</strong> {{ event.availableSeats }}</p>
       </mat-card-content>
 

@@ -8,13 +8,6 @@ export class EventDto {
   availableSeats: number;
 
   constructor(
-    // id: number = 0,
-    // title: string = '',
-    // description: string = '',
-    // location: string = '',
-    // date: string = '',
-    // price: number = 0,
-    // availableSeats: number = 0
   ) {
     this.id = 0;
     this.title = '';

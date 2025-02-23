@@ -1,45 +1,51 @@
-<div class="event-form-container">
-  <mat-card class="event-card">
-    <mat-card-title>Add New Event</mat-card-title>
+<div class="add-event-container">
+  <h2>Add New Event</h2>
 
-    <form class="event-form" (submit)="addEvent()">
-      <div class="form-fields">
-        <mat-form-field appearance="outline">
-          <mat-label>Event Title</mat-label>
-          <input matInput type="text" [(ngModel)]="event.title" name="title" required>
-        </mat-form-field>
+  <mat-card class="add-event-card">
+    <mat-card-content>
+      <!-- Event Title -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Event Title</mat-label>
+        <input matInput [(ngModel)]="event.title" placeholder="Enter event title">
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Description</mat-label>
-          <textarea matInput [(ngModel)]="event.description" name="description"></textarea>
-        </mat-form-field>
+      <!-- Event Description -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Event Description</mat-label>
+        <textarea matInput [(ngModel)]="event.description" placeholder="Enter event description"></textarea>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Location</mat-label>
-          <input matInput type="text" [(ngModel)]="event.location" name="location" required>
-        </mat-form-field>
+      <!-- Location -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Event Location</mat-label>
+        <input matInput [(ngModel)]="event.location" placeholder="Enter event location">
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Date</mat-label>
-          <input matInput type="date" [(ngModel)]="event.date" name="date" required>
-        </mat-form-field>
+      <!-- Date Picker for Event Date -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Event Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="event.date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Price ($)</mat-label>
-          <input matInput type="number" [(ngModel)]="event.price" name="price" required>
-        </mat-form-field>
+      <!-- Price -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Price (INR)</mat-label>
+        <input matInput type="number" [(ngModel)]="event.price">
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Available Seats</mat-label>
-          <input matInput type="number" [(ngModel)]="event.availableSeats" name="availableSeats" required>
-        </mat-form-field>
-      </div>
+      <!-- Available Seats -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Available Seats</mat-label>
+        <input matInput type="number" [(ngModel)]="event.availableSeats">
+      </mat-form-field>
+    </mat-card-content>
 
-      <div class="button-container">
-        <button mat-raised-button color="primary" type="submit">Add Event</button>
-      </div>
-      
-      <p class="success-message">{{ message }}</p>
-    </form>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="addEvent()">Add Event</button>
+    </mat-card-actions>
+
+    <p class="success-message" *ngIf="message">{{ message }}</p>
   </mat-card>
 </div>

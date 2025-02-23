@@ -10,7 +10,15 @@ import { EventDto } from '../../models/event.model';
   styleUrl: './add-event.component.scss'
 })
 export class AddEventComponent {
-  event = new EventDto() 
+  event: EventDto = {
+    id: 0,
+    title: '',
+    description: '',
+    location: '',
+    date: '',
+    price: 0,
+    availableSeats: 0
+  };
 
   message = '';
 
@@ -20,6 +28,10 @@ export class AddEventComponent {
     if (!this.event.title || !this.event.date || !this.event.location) {
       this.message = 'Please fill in all required fields!';
       return;
+    }
+
+    if (this.event.date) {
+      this.event.date = new Date(this.event.date).toISOString().split('T')[0];
     }
 
     this.eventService.addEvent(this.event).subscribe(() => {

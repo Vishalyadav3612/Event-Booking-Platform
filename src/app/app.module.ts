@@ -22,9 +22,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';  
-import { MatMenuModule } from '@angular/material/menu'; 
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,7 @@ import { MatMenuModule } from '@angular/material/menu';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 }) ,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 }),
     FormsModule,
 
     BrowserAnimationsModule,
@@ -49,8 +52,13 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatMenuModule
-    
+    MatMenuModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+
+
 
   ],
   providers: [HttpClient, EventService, BookingService, AuthService, AdminGuard, AuthGuardService],
